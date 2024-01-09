@@ -9,7 +9,7 @@ def gamescene():
 
     print("\n\n\n") # 3 blank lines
     print("Hello Val!!!")
-    print("How's your day??")
+    print("How's your day")
 
     while True:
         # repeat forever, or you turn it off!
