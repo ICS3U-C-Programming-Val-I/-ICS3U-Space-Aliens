@@ -23,6 +23,7 @@ def gamescene():
     while True:
         # get user input
         keys = ugame.buttons.get_pressed()
+        
         if keys & ugame.K_X:
             print("A")
         if keys & ugame.K_O:
