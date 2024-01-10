@@ -6,6 +6,7 @@
 
 import ugame
 import stage
+import constants
 
 def gamescene():
     # This function is the main game scene.
@@ -13,10 +14,10 @@ def gamescene():
     image_bank_background = stage.Bank.from_bmp16("space_aliens_background.bmp")
     image_bank_sprites = stage.Bank.from_bmp16("space_aliens.bmp")
 
-    background = stage.Grid(image_bank_background, 10, 8)
+    background = stage.Grid(image_bank_background, constants.SCREEN_GRID_X, constants.SCREEN_GRID_Y)
 
     character = stage.Sprite(image_bank_sprites, 5, 75, 66)
-    game = stage.Stage(ugame.display, 60)
+    game = stage.Stage(ugame.display, constants.FPS)
     game.layers = [character] + [background]
     game.render_block()
 
@@ -25,21 +26,27 @@ def gamescene():
         keys = ugame.buttons.get_pressed()
 
         if keys & ugame.K_X:
-            print("A")
+            pass
         if keys & ugame.K_O:
-            print("B")
+            pass
         if keys & ugame.K_START:
-            print("Start")
+            pass
         if keys & ugame.K_SELECT:
-            print("Select")
+            pass
         if keys & ugame.K_RIGHT:
-            character.move(character.x + 1, character.y)
+            if character.x >= constants.SCREEN_X:
+                character.move(character.x + 1, character.y)
+            else:
+                character.move(constants.SCREEN_X, character.y)
         if keys & ugame.K_LEFT:
-            character.move(character.x - 1, character.y)
+            if character.x >= 0:
+                character.move(character.x - 1, character.y)
+            else:
+                character.move(0, character.y)
         if keys & ugame.K_UP:
-            character.move(character.x, character.y - 1)
+            pass
         if keys & ugame.K_DOWN:
-            character.move(character.x, character.y + 1)
+            pass
         # update game logic
         
         # redraw Sprites
