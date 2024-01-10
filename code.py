@@ -35,7 +35,7 @@ def gamescene():
         if keys & ugame.K_RIGHT:
             character.move(character.x + 1, character.y)
         if keys & ugame.K_LEFT:
-            character.move(character.x 1, character.y)
+            character.move(character.x - 1, character.y)
         if keys & ugame.K_UP:
             character.move(character.x, character.y - 1)
         if keys & ugame.K_DOWN:
