@@ -31,7 +31,8 @@ def gamescene():
             print("Start")
         if keys & ugame.K_SELECT:
             print("Select")
-        if keys & ugame.K_RIGHT: ship.move(ship.x + 1, ship.y)
+        if keys & ugame.K_RIGHT:
+            ship.move(ship.x + 1, ship.y)
         if keys & ugame.K_LEFT:
             ship.move(ship.x 1, ship.y)
         if keys & ugame.K_UP:
