@@ -21,3 +21,11 @@ LASER_SPEED = 2
 OFF_TOP_SCREEN = -1 * SPRITE_SIZE
 OFF_BOTTOM_SCREEN = SCREEN_Y + SPRITE_SIZE
 FPS = 60
+
+# Using for button state
+button_state = {
+    "button_up": "up",
+    "button_just_pressed": "just pressed",
+    "button_still_pressed": "still pressed",
+    "button_released": "released",
+}

@@ -17,8 +17,13 @@ def gamescene():
     background = stage.Grid(image_bank_background, constants.SCREEN_GRID_X, constants.SCREEN_GRID_Y)
 
     ship = stage.Sprite(image_bank_sprites, 5, 75, constants.SCREEN_Y - (2 * constants.SPRITE_SIZE))
+
+    alien = stage.Sprite(image_bank_sprites, 9,
+                      int(constants.SCREEN_X / 2 - constants.SPRITE_SIZE / 2),
+                      16)
+
     game = stage.Stage(ugame.display, constants.FPS)
-    game.layers = [ship] + [background]
+    game.layers = [ship] + [alien] + [background]
     game.render_block()
 
     while True:
