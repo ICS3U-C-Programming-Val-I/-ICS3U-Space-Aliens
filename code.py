@@ -16,9 +16,9 @@ def gamescene():
 
     background = stage.Grid(image_bank_background, constants.SCREEN_GRID_X, constants.SCREEN_GRID_Y)
 
-    character = stage.Sprite(image_bank_sprites, 5, 75, 66)
+    ship = stage.Sprite(image_bank_sprites, 5, 75, 66)
     game = stage.Stage(ugame.display, constants.FPS)
-    game.layers = [character] + [background]
+    game.layers = [ship] + [background]
     game.render_block()
 
     while True:
@@ -34,15 +34,15 @@ def gamescene():
         if keys & ugame.K_SELECT:
             pass
         if keys & ugame.K_RIGHT:
-            if character.x >= constants.SCREEN_X:
-                character.move(character.x + 1, character.y)
+            if ship.x >= constants.SCREEN_X:
+                ship.move(ship.x + 1, ship.y)
             else:
-                character.move(constants.SCREEN_X, character.y)
+                ship.move(constants.SCREEN_X, ship.y)
         if keys & ugame.K_LEFT:
-            if character.x >= 0:
-                character.move(character.x - 1, character.y)
+            if ship.x >= 0:
+                ship.move(ship.x - 1, ship.y)
             else:
-                character.move(0, character.y)
+                ship.move(0, ship.y)
         if keys & ugame.K_UP:
             pass
         if keys & ugame.K_DOWN:
@@ -50,7 +50,7 @@ def gamescene():
         # update game logic
         
         # redraw Sprites
-        game.render_sprites([character])
+        game.render_sprites([ship])
         game.tick()
 
 if __name__ == "__main__":
