@@ -22,7 +22,7 @@ def gamescene():
 
     # get sound ready
     pew_sound = open("pew.wav", 'rb')
-    sound ugame.audio
+    sound = ugame.audio
     sound.stop()
     sound.mute(False)
 
@@ -79,7 +79,7 @@ def gamescene():
         # Play sound if A button is pressed
         if a_button == constants.button_state["button_just_pressed"]:
             sound.play(pew_sound)
-            
+
         # redraw Sprites
         game.render_sprites([ship] + [alien])
         game.tick()
