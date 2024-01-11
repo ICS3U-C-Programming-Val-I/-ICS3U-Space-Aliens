@@ -42,31 +42,44 @@ def gamescene():
         # get user input
         keys = ugame.buttons.get_pressed()
 
+        # A button to fire
+        if keys & ugame.K_0 != 0:
+            if a_button == constants.button_state["button_up"]:
+                a_button = constants.button_state["button_just_pressed"]
+            elif a_button == constants.button_state["button_just_pressed"]:
+                a_button = constants.button_state["button_still_pressed"]
+        else:
+            if a button == constants.button_state["button_still_pressed"]:
+                a_button = constants.button_state["button_released"]
+            else:
+                a_button = constants.button_state["button_up"]
 
-        if keys & ugame.K_X:
+        # B button
+        if keys & ugame.K_X != 0:
             pass
-        if keys & ugame.K_O:
+        if keys & ugame.K_START != 0:
             pass
-        if keys & ugame.K_START:
+        if keys & ugame.K_SELECT != 0:
             pass
-        if keys & ugame.K_SELECT:
-            pass
-        if keys & ugame.K_RIGHT:
+        if keys & ugame.K_RIGHT != 0:
             if ship.x < constants.SCREEN_X - constants.SPRITE_SIZE:
                 ship.move(ship.x + 1, ship.y)
             else:
                 ship.move(constants.SCREEN_X - constants.SPRITE_SIZE, ship.y)
-        if keys & ugame.K_LEFT:
+        if keys & ugame.K_LEFT != 0:
             if ship.x >= 0:
                 ship.move(ship.x - 1, ship.y)
             else:
                 ship.move(0, ship.y)
-        if keys & ugame.K_UP:
+        if keys & ugame.K_UP != 0:
             pass
-        if keys & ugame.K_DOWN:
+        if keys & ugame.K_DOWN != 0:
             pass
         # update game logic
-        
+        # Play sound if A button is pressed
+        if a_button == constants.button_state["button_just_pressed"]:
+            sound.play(pew_sound)
+            
         # redraw Sprites
         game.render_sprites([ship] + [alien])
         game.tick()
