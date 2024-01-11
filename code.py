@@ -34,7 +34,7 @@ def gamescene():
         if keys & ugame.K_SELECT:
             pass
         if keys & ugame.K_RIGHT:
-            if ship.x < 150:
+            if ship.x < 120:
                 ship.move(ship.x + 1, ship.y)
             else:
                 ship.move(constants.SCREEN_X, ship.y)
