@@ -49,7 +49,7 @@ def gamescene():
             elif a_button == constants.button_state["button_just_pressed"]:
                 a_button = constants.button_state["button_still_pressed"]
         else:
-            if a button == constants.button_state["button_still_pressed"]:
+            if a_button == constants.button_state["button_still_pressed"]:
                 a_button = constants.button_state["button_released"]
             else:
                 a_button = constants.button_state["button_up"]
