@@ -104,18 +104,16 @@ def menu_scene():
         keys = ugame.buttons.get_pressed()
 
         if keys & ugame.K_START != 0:
-            game_scene()
+            game_scene(score, lives)
 
         # redraw Sprites
         game.tick()
 
 
-def game_scene():
+def game_scene(score, lives):
     # This function is the main game scene.
 
     # for score
-    score = 0
-    lives = 3
     
     lives_text = stage.Text(width = 29, height = 14)
     lives_text.clear()
@@ -283,8 +281,17 @@ def game_scene():
                     #alien hit the ship
                     sound.stop()
                     sound.play(crash_sound)
-                    time.sleep(2.0)
-                    game_over_scene(score)
+                    time.sleep(1.0)
+                    aliens[alien_number].move(constants.OFF_SCREEN_X, constants.OFF_SCREEN_Y)
+                    if lives > 0:
+                        lives = lives -1
+                        lives_text.clear()
+                        lives_text.cursor(0,0)
+                        lives_text.move(95,1)
+                        lives_text.text("Lives: {0}".format(lives))
+                        game_scene(score, lives)
+                    if lives <= 0:
+                        game_over_scene(score)
 
         # redraw Sprites
         game.render_sprites(lasers + [ship] + aliens)
