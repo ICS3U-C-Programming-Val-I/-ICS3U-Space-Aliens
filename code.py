@@ -89,9 +89,14 @@ def menu_scene():
     text.append(text2)
  
     text3 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
-    text3.move(0, 90)
-    text3.text("PRESS B TO SEE RULES")
+    text3.move(35, 80)
+    text3.text("PRESS SELECT")
     text.append(text3)
+
+    text4 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
+    text4.move(35, 90)
+    text4.text("TO SEE RULES")
+    text.append(text4)
 
 
     background = stage.Grid(image_bank_mt_background, 10, 8)
@@ -99,6 +104,7 @@ def menu_scene():
     game = stage.Stage(ugame.display, constants.FPS)
     game.layers = text + [background]
     game.render_block()
+
     # declare variables score
     score = 0
     lives = 3
@@ -110,7 +116,7 @@ def menu_scene():
 
         if keys & ugame.K_START != 0:
             game_scene(score, lives)
-        if keys & ugame.K_O != 0:
+        if keys & ugame.K_SELECT != 0:
             rules_scene()
 
         # redraw Sprites
@@ -140,7 +146,7 @@ def rules_scene():
 
     text2 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
     text2.move(0, 40)
-    text2.text("Shoot zombies to ")
+    text2.text("Shoot Aliens to ")
     text.append(text2)
     
     text7 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
@@ -150,7 +156,7 @@ def rules_scene():
 
     text5 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
     text5.move(0, 65)
-    text5.text("If zombies escapes,")
+    text5.text("If Aliens escapes,")
     text.append(text5)
 
     text3 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
@@ -171,6 +177,12 @@ def rules_scene():
     score = 0
     lives = 3
 
+    background = stage.Grid(image_bank_mt_background, 10, 8)
+
+    game = stage.Stage(ugame.display, constants.FPS)
+    game.layers = text + [background]
+    game.render_block()
+
     while True:
         # get user input
         keys = ugame.buttons.get_pressed()
@@ -180,12 +192,6 @@ def rules_scene():
         if keys & ugame.K_O != 0:
             menu_scene()
 
-
-    background = stage.Grid(image_bank_mt_background, 10, 8)
-
-    game = stage.Stage(ugame.display, constants.FPS)
-    game.layers = text + [background]
-    game.render_block()
 
 def game_scene(score, lives):
     # This function is the main game scene.
@@ -356,14 +362,14 @@ def game_scene(score, lives):
                     sound.play(crash_sound)
                     time.sleep(1.0)
                     aliens[alien_number].move(constants.OFF_SCREEN_X, constants.OFF_SCREEN_Y)
-                    if lives > 0:
+                    if lives > 1:
                         lives = lives -1
                         lives_text.clear()
                         lives_text.cursor(0,0)
                         lives_text.move(95,1)
                         lives_text.text("Lives: {0}".format(lives))
                         game_scene(score, lives)
-                    if lives <= 0:
+                    else: 
                         game_over_scene(score)
 
         # redraw Sprites
@@ -419,4 +425,4 @@ def game_over_scene(final_score):
 
 
 if __name__ == "__main__":
-   splash_scene() 
+    splash_scene() 
