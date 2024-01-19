@@ -89,8 +89,8 @@ def menu_scene():
     text.append(text2)
  
     text3 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
-    text3.move(10, 90)
-    text3.text("PRESS SELECT TO SEE RULES")
+    text3.move(0, 90)
+    text3.text("PRESS B TO SEE RULES")
     text.append(text3)
 
 
@@ -110,10 +110,82 @@ def menu_scene():
 
         if keys & ugame.K_START != 0:
             game_scene(score, lives)
+        if keys & ugame.K_O != 0:
+            rules_scene()
 
         # redraw Sprites
         game.tick()
 
+def rules_scene():
+    # This function is the menu scene.
+
+    image_bank_mt_background = stage.Bank.from_bmp16("mt_game_studio.bmp")
+    
+     # add text objects
+    text = []
+    text1 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
+    text1.move(0, 0)
+    text1.text("Press A to shoot")
+    text.append(text1)
+
+    text4 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
+    text4.move(0, 15)
+    text4.text("Press left & right ")
+    text.append(text4)
+
+    text6 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
+    text6.move(0, 25)
+    text6.text("to move ")
+    text.append(text6)
+
+    text2 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
+    text2.move(0, 40)
+    text2.text("Shoot zombies to ")
+    text.append(text2)
+    
+    text7 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
+    text7.move(0, 50)
+    text7.text("get points")
+    text.append(text7)
+
+    text5 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
+    text5.move(0, 65)
+    text5.text("If zombies escapes,")
+    text.append(text5)
+
+    text3 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
+    text3.move(0, 75)
+    text3.text("you lose a point")
+    text.append(text3)
+
+    text8 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
+    text8.move(0, 90)
+    text8.text("DON'T DIE")
+    text.append(text8)
+
+    text9 = stage.Text (width=29, height=12, font=None, palette=constants.RED_PALETTE, buffer=None)
+    text9.move(15, 105)
+    text9.text("Press B or Start")
+    text.append(text9)
+
+    score = 0
+    lives = 3
+
+    while True:
+        # get user input
+        keys = ugame.buttons.get_pressed()
+
+        if keys & ugame.K_START != 0:
+            game_scene(score, lives)
+        if keys & ugame.K_O != 0:
+            menu_scene()
+
+
+    background = stage.Grid(image_bank_mt_background, 10, 8)
+
+    game = stage.Stage(ugame.display, constants.FPS)
+    game.layers = text + [background]
+    game.render_block()
 
 def game_scene(score, lives):
     # This function is the main game scene.
@@ -161,11 +233,7 @@ def game_scene(score, lives):
 
     background = stage.Grid(image_bank_background, constants.SCREEN_GRID_X, constants.SCREEN_GRID_Y)
 
-    for x_location in range(constants.SCREEN_GRID_X):
-        for y_location in range(constants.SCREEN_GRID_Y): 
-            tile_picked = random.randint(1, 3)
-            background.tile(x_location, y_location, tile_picked)
-
+    
 
     ship = stage.Sprite(image_bank_sprites, 5, 75, constants.SCREEN_Y - (2 * constants.SPRITE_SIZE))
 
@@ -324,7 +392,7 @@ def game_over_scene(final_score):
 
     text3=stage.Text(width=29, height=14, font=None, palette=constants.RED_PALETTE, buffer=None)
     text3.move(32,110)
-    text3.text("PRESS B FOR RULES") 
+    text3.text("PRESS SELECT") 
     text.append(text3)
 
     # create a stage for the background to show up on
